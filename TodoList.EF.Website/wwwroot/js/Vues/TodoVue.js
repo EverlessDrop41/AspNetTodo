@@ -1,11 +1,16 @@
 ﻿var TodoVue = new Vue({
     el: "#TodoApp",
     data: {
+        editMode: false,
         todos: [
             { 'id': 0, 'name': 'Loading Todos', 'completed': false}
         ]
     },
     methods: {
+        toggleEditMode: function () {
+            console.log(this.editMode);
+            this.$set('editMode', !this.editMode);
+        },
         toggleCompleted: function (id) {
             console.log("Completing " + id);
         },
@@ -23,7 +28,7 @@
                 for (var i = 0; i < todosToAdd.length; i++) {
                     var todo = todosToAdd[i];
                     this.todos.$set(i, {
-                        _id: todo._id,
+                        id: todo.id,
                         name: todo.name,
                         completed: todo.completed
                     });

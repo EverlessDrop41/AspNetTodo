@@ -12,7 +12,7 @@ namespace TodoList.EF.Repositories
         private static List<Todo> _todoList = new List<Todo>()
         {
             new Todo() { Id = 0, Name = "Wizardry", Completed = false },
-            new Todo() { Id = 1, Name = "Something", Completed = false },
+            new Todo() { Id = 1, Name = "Something", Completed = true },
             new Todo() { Id = 2, Name = "The Dishes", Completed = false }
         };
 

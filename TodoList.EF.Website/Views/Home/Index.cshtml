@@ -6,21 +6,34 @@
     <script src="~/js/Vues/TodoVue.js"></script>
 }
 
-<div class="row">
-    <div class="col-xs-12">
-        <h1>Hello World</h1>
+<span id="TodoApp">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>ASP Todo App</h1>
 
-        <p>This is a todo list app</p>
-
-        <hr />
-
-        <div id="TodoApp">
-            <ul class="list-group">
-                 <button v-for="todo in todos" type="button" class="list-group-item" v-bind:class="{ 'completed' : todo.completed }" v-on:click="toggleCompleted(todo.id)">
-                    {{todo.name}}
-                    <span class="badge" v-on:click="removeTodo(todo.id)">X</span>
-                 </button>
-            </ul>
+            <hr />
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn col-xs-12" v-on:click="toggleEditMode()">Edit</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <br />
+        <div class="col-xs-12" >
+            <div>
+                <ul class="list-group">
+                    <li v-for="todo in todos" type="button" class="list-group-item" v-bind:class="{ 'completed' : todo.completed }">
+                        <input type="checkbox" v-model="todo.completed" />
+                        <input type="text" v-model="todo.name" v-if="editMode"></input>
+                        <span v-if="!editMode">{{todo.name}}</span>
+                        <span v-if="editMode" class="badge" v-on:click="removeTodo(todo.id)" style="cursor: pointer">X</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</span>
