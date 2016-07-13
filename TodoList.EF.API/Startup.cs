@@ -45,6 +45,7 @@ namespace TodoList.EF.API
 
             services.AddTransient<IQueryHandler<GetTodosQuery, TodoListDTO>, GetTodosQueryHandler>();
             services.AddTransient<IQueryHandler<GetTodoByIdQuery, SingleTodoDTO>, GetTodoByIdQueryHandler>();
+            services.AddTransient<IQueryHandler<UpdateTodoQuery, SuccessDTO>, UpdateTodoQueryHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +53,7 @@ namespace TodoList.EF.API
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+             
             app.UseMvc();
         }
     }
