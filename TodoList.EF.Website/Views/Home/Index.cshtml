@@ -17,19 +17,47 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <button class="btn col-xs-12" v-on:click="toggleEditMode()">Edit</button>
+            <button class="btn col-xs-12"
+                    v-bind:class="{ 'btn-danger' : !editMode, 'btn-warning' : editMode }"
+                    v-on:click="toggleEditMode()">
+                {{ editMode ? "Stop Editing" : "Start Editing" }}
+            </button>
         </div>
     </div>
 
     <div class="row">
         <br />
+        <div class="col-xs-12">
+            <div class="alert alert-info" v-if="editMode">
+                Stop Editing to Save Changes
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Add Todo</div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Task name">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Add!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-xs-12" >
             <div>
                 <ul class="list-group">
-                    <li v-for="todo in todos" type="button" class="list-group-item" v-bind:class="{ 'completed' : todo.completed }">
-                        <input type="checkbox" v-model="todo.completed" />
-                        <input type="text" v-model="todo.name" v-if="editMode"></input>
-                        <span v-if="!editMode">{{todo.name}}</span>
+                    <li v-for="todo in todos | orderBy '!completed' 'id' -1" type="button" class="list-group-item" v-bind:class="{ 'completed' : todo.completed }">
+                        <input v-if="editMode" type="checkbox" v-model="todo.completed" />
+                        <input type="text"  v-model="todo.name" v-if="editMode"></input>
+                        <span v-if="!editMode">{{todo.name}} {{todo.completed ? " - completed" : ""}}</span>
                         <span v-if="editMode" class="badge" v-on:click="removeTodo(todo.id)" style="cursor: pointer">X</span>
                     </li>
                 </ul>
