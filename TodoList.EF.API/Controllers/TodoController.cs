@@ -18,15 +18,21 @@ namespace TodoList.EF.API.Controllers
         IQueryHandler<GetTodosQuery, TodoListDTO> _getTodosQuery;
         IQueryHandler<GetTodoByIdQuery, SingleTodoDTO> _getTodoByIdQuery;
         IQueryHandler<UpdateTodoQuery, SuccessDTO> _updateTodoQuery;
+        IQueryHandler<CreateTodoQuery, AddDTO> _createTodoQuery;
+        IQueryHandler<DeleteTodoQuery, SuccessDTO> _deleteTodoQuery;
 
         public TodoController(
             IQueryHandler<GetTodosQuery, TodoListDTO> getTodosQuery,
             IQueryHandler<GetTodoByIdQuery, SingleTodoDTO> getTodoByIdQuery,
-            IQueryHandler<UpdateTodoQuery, SuccessDTO> updateTodoQuery)
+            IQueryHandler<UpdateTodoQuery, SuccessDTO> updateTodoQuery,
+            IQueryHandler<CreateTodoQuery, AddDTO> createTodoQuery,
+            IQueryHandler<DeleteTodoQuery, SuccessDTO> deleteTodoQuery)
         {
             _getTodosQuery = getTodosQuery;
             _getTodoByIdQuery = getTodoByIdQuery;
             _updateTodoQuery = updateTodoQuery;
+            _createTodoQuery = createTodoQuery;
+            _deleteTodoQuery = deleteTodoQuery;
         }
 
         // GET: api/todo
@@ -43,10 +49,22 @@ namespace TodoList.EF.API.Controllers
             return Ok(_getTodoByIdQuery.Execute(query));
         }
 
+        [HttpPost]
+        public IActionResult CreateTodo(CreateTodoQuery query)
+        {
+            return Ok(_createTodoQuery.Execute(query));
+        }
+
         [HttpPut("{Id}")]
         public IActionResult UpdateTodo(UpdateTodoQuery query)
         {
             return Ok(_updateTodoQuery.Execute(query));
+        }
+
+        [HttpDelete("{Id}")]
+        public IActionResult DeleteTodo(DeleteTodoQuery query)
+        {
+            return Ok(_deleteTodoQuery.Execute(query));
         }
     }
 }

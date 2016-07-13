@@ -46,6 +46,8 @@ namespace TodoList.EF.API
             services.AddTransient<IQueryHandler<GetTodosQuery, TodoListDTO>, GetTodosQueryHandler>();
             services.AddTransient<IQueryHandler<GetTodoByIdQuery, SingleTodoDTO>, GetTodoByIdQueryHandler>();
             services.AddTransient<IQueryHandler<UpdateTodoQuery, SuccessDTO>, UpdateTodoQueryHandler>();
+            services.AddTransient<IQueryHandler<CreateTodoQuery, AddDTO>, CreateTodoQueryHandler>();
+            services.AddTransient<IQueryHandler<DeleteTodoQuery, SuccessDTO>, DeleteTodoQueryHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
