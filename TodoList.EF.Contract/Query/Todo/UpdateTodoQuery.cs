@@ -12,12 +12,7 @@ namespace TodoList.EF.Contract.Query.Todo
         public int? Id { get; set; }
 
         [FromBody]
-        public TodoUpdateObject NewTodo { get; set; }
+        public TodoQueryObject NewTodo { get; set; }
     }
-
-    public struct TodoUpdateObject
-    {
-        public string Name { get; set; }
-        public bool? Completed { get; set; }
-    } 
+    
 }
