@@ -58,7 +58,7 @@ namespace TodoList.EF.API
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseCors(builder => 
-                builder.WithOrigins("http://localhost:50347").AllowAnyHeader()
+                builder.WithOrigins("http://localhost:50347").AllowAnyHeader().AllowAnyMethod()
             );
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
