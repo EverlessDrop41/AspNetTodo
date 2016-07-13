@@ -60,7 +60,7 @@
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js" 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"
                 asp-fallback-src="~/lib/vue/dist/vue.min.js"
                 asp-fallback-test="Vue"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
@@ -68,6 +68,11 @@
                 asp-fallback-src="~/lib/vue-resourse/dist/vue-resource.min.js"
                 asp-fallback-test="Vue.http"></script>
     </environment>
+
+    <script>
+        Vue.http.options.root = 'http://localhost:49502/api';
+        Vue.http.options.xhr = { withCredentials: false };
+    </script>
 
     @RenderSection("scripts", required: false)
 </body>

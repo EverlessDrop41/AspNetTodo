@@ -39,7 +39,8 @@ namespace TodoList.EF.API.Controllers
         [HttpGet]
         public IActionResult Get(GetTodosQuery query)
         {
-            return Ok(_getTodosQuery.Execute(query));
+            var res = _getTodosQuery.Execute(query);
+            return Ok(res);
         }
 
         // GET api/todo/5

@@ -36,10 +36,14 @@ namespace TodoList.EF.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            
+
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
+
+            services.AddCors();
 
             services.AddSingleton<TodoRepository>();
 
@@ -53,9 +57,13 @@ namespace TodoList.EF.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseCors(builder => 
+                builder.WithOrigins("http://localhost:50347").AllowAnyHeader()
+            );
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-             
+
             app.UseMvc();
         }
     }

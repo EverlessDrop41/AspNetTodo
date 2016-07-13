@@ -11,5 +11,16 @@
         <h1>Hello World</h1>
 
         <p>This is a todo list app</p>
+
+        <hr />
+
+        <div id="TodoApp">
+            <ul class="list-group">
+                 <button v-for="todo in todos" type="button" class="list-group-item" v-bind:class="{ 'completed' : todo.completed }" v-on:click="toggleCompleted(todo.id)">
+                    {{todo.name}}
+                    <span class="badge" v-on:click="removeTodo(todo.id)">X</span>
+                 </button>
+            </ul>
+        </div>
     </div>
 </div>
