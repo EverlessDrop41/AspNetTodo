@@ -20,11 +20,7 @@ namespace TodoList.EF.Handler.Todo
 
         public SuccessDTO Execute(DeleteTodoQuery query)
         {
-            if (_todoRepo.Has(query.Id))
-            {
-                return _todoRepo.Delete(query.Id);
-            }
-            return SuccessDTO.NotFound;
+            return _todoRepo.Delete(query.Id);
         }
     }
 }

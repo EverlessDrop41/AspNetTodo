@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TodoList.EF.Contract.DTO;
 using TodoList.EF.Model;
 using TodoList.EF.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace TodoList.EF.Repositories
 {
@@ -21,12 +22,12 @@ namespace TodoList.EF.Repositories
 
         public TodoRepository(TodoListContext dbContext)
         {
-           // _dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public IQueryable<Todo> AsQueryable()
         {
-            return _todoList.AsQueryable();
+            return _dbContext.Todos.AsQueryable();
         }
 
         public bool Has(int id)
@@ -36,8 +37,6 @@ namespace TodoList.EF.Repositories
 
         public AddDTO Create(Todo item)
         {
-            var data = AsQueryable();
-
             string error = "";
 
             if (string.IsNullOrWhiteSpace(item.Name))
@@ -52,8 +51,9 @@ namespace TodoList.EF.Repositories
 
             if (string.IsNullOrWhiteSpace(error))
             {
-                item.Id = _todoList.Count();
-                _todoList.Add(item);
+                var newTodo = new Todo(item.Name, item.Completed.Value);
+                _dbContext.Todos.Add(newTodo);
+                _dbContext.SaveChanges();
                 return new AddDTO() { Success = true, Id = item.Id};
             }
 
@@ -62,46 +62,34 @@ namespace TodoList.EF.Repositories
 
         public SuccessDTO Update(int id, Func<Todo, Todo> getNew)
         {
-            var data = AsQueryable().Where(x => x.Id == id && x.IsDeleted == false);
-
-            if (data.Any())
+            try
             {
-                try
-                {
-                    Todo todo = data.Select(x => new Todo(x.Name, x.Completed.Value) {Id = id}).ToList()[0];
-
-                    _todoList[todo.Id] = getNew(todo);
-                    return new SuccessDTO() { Success = true };
-                }
-                catch (Exception)
-                {
-                    return new SuccessDTO() { Success = false, ErrorMessage = "Error finding todo"};
-                } 
+                Todo theTodo = _dbContext.Todos.Where(x => x.Id == id && x.IsDeleted == false).First();
+                Todo newTodo = getNew(theTodo);
+                theTodo.Name = newTodo.Name;
+                theTodo.Completed = newTodo.Completed;
+                _dbContext.SaveChanges();
+                return new SuccessDTO() { Success = true };
             }
-
-            return new SuccessDTO() { Success = false, ErrorMessage = "Cannot find todo with that id" };
+            catch (Exception e) when (e is ArgumentNullException || e is InvalidOperationException)
+            {
+                return new SuccessDTO() { Success = false, ErrorMessage = "Cannot find todo with that id" };
+            }
         }
 
         public SuccessDTO Delete(int id)
         {
-            var data = AsQueryable();
-
-            if (Has(id))
+            try
             {
-                try
-                {
-                    Todo todo = data.Select(x => new Todo(x.Name, x.Completed.Value) { Id = id }).ToList()[0];
-
-                    _todoList[todo.Id].IsDeleted = true;
-                    return new SuccessDTO() { Success = true };
-                }
-                catch (Exception)
-                {
-                    return new SuccessDTO() { Success = false, ErrorMessage = "Error finding todo" };
-                }
+                Todo theTodo = _dbContext.Todos.Where(x => x.Id == id).First();
+                theTodo.IsDeleted = true;
+                _dbContext.SaveChanges();
+                return new SuccessDTO() { Success = true };
             }
-
-            return new SuccessDTO() { Success = false, ErrorMessage = "Cannout find todo to delete" };
+            catch (Exception e) when (e is ArgumentNullException || e is InvalidOperationException)
+            {
+                return new SuccessDTO() { Success = false, ErrorMessage = "Cannot find todo with that id" };
+            }
         }
     }
 }
