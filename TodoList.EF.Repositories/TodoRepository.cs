@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TodoList.EF.Contract.DTO;
 using TodoList.EF.Model;
+using TodoList.EF.Database;
 
 namespace TodoList.EF.Repositories
 {
@@ -15,6 +16,13 @@ namespace TodoList.EF.Repositories
             new Todo() { Id = 1, Name = "Something", Completed = true },
             new Todo() { Id = 2, Name = "The Dishes", Completed = false }
         };
+
+        TodoListContext _dbContext;
+
+        public TodoRepository(TodoListContext dbContext)
+        {
+           // _dbContext = dbContext;
+        }
 
         public IQueryable<Todo> AsQueryable()
         {
