@@ -2,9 +2,8 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Microsoft.EntityFrameworkCore": "1.0.0",
     "NETStandard.Library": "1.6.0",
-    "TodoList.EF.Contract": "1.0.0-*",
-    "TodoList.EF.Database": "1.0.0-*",
     "TodoList.EF.Model": "1.0.0-*"
   },
 

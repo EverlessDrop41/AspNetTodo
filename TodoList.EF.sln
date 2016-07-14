@@ -21,6 +21,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TodoList.EF.API", "TodoList
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TodoList.EF.Website", "TodoList.EF.Website\TodoList.EF.Website.xproj", "{C88389C9-5F47-4FB2-B6CA-37BC2730BEA9}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TodoList.EF.Database", "TodoList.EF.Database\TodoList.EF.Database.xproj", "{129EC4A2-208A-4991-AB46-3DBE8435314E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C88389C9-5F47-4FB2-B6CA-37BC2730BEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C88389C9-5F47-4FB2-B6CA-37BC2730BEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C88389C9-5F47-4FB2-B6CA-37BC2730BEA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{129EC4A2-208A-4991-AB46-3DBE8435314E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{129EC4A2-208A-4991-AB46-3DBE8435314E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{129EC4A2-208A-4991-AB46-3DBE8435314E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{129EC4A2-208A-4991-AB46-3DBE8435314E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,5 +68,6 @@ Global
 		{5016188D-0F39-4E04-9BB1-1CAAFCD98B87} = {64BF09A4-CE1E-4EC3-8270-419E96AC2062}
 		{EA1E3DF7-14C2-4224-9596-B04B66FB029B} = {2735A406-79B5-471D-9CD0-1B663B9056F8}
 		{C88389C9-5F47-4FB2-B6CA-37BC2730BEA9} = {BB1B60ED-B610-46C0-AE50-B829EE9107FF}
+		{129EC4A2-208A-4991-AB46-3DBE8435314E} = {64BF09A4-CE1E-4EC3-8270-419E96AC2062}
 	EndGlobalSection
 EndGlobal

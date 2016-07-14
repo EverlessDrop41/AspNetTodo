@@ -254,3 +254,6 @@ paket-files/
 
 #Bower Files
 */wwwroot/lib/*
+
+#Migrations
+TodoList.EF.API/Migrations/*

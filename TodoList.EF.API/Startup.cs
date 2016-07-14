@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ using TodoList.EF.Contract.Query.Todo;
 using TodoList.EF.Handler;
 using TodoList.EF.Handler.Todo;
 using TodoList.EF.Repositories;
+using TodoList.EF.Database;
 using Newtonsoft.Json;
 
 namespace TodoList.EF.API
@@ -36,7 +38,10 @@ namespace TodoList.EF.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            
+            services.AddDbContext<TodoListContext>(options => 
+                options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TodoListDb;Trusted_Connection=True;", 
+                    b => b.MigrationsAssembly("TodoList.EF.API"))
+            );
 
             services.AddMvc().AddJsonOptions(options =>
             {
