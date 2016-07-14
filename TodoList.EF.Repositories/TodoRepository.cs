@@ -37,7 +37,7 @@ namespace TodoList.EF.Repositories
                 error = "Name is required";
             }
 
-            if (item.Completed.HasValue)
+            if (!item.Completed.HasValue)
             {
                 item.Completed = false;
             }
