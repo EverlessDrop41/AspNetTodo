@@ -31,3 +31,8 @@
     display: none
   }
 }
+
+.completed > * {
+    color: #adadad;
+    text-decoration: line-through;
+}
