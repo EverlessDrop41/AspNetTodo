@@ -44,7 +44,6 @@
 
             var onUpdateError = function (err) {
                 console.error(err);
-                alert("There was an error updating todos");
             }
 
             for (var i in this.todos) {
@@ -62,7 +61,7 @@
                             console.log("Completed updates");
                             populateListFromAPI(t);
                         }
-                    } else { onUpdateError(t); }
+                    } else { onUpdateError(res.data); }
                     
                 }, function () {
                     onUpdateError("Http Error");

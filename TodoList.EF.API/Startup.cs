@@ -38,8 +38,10 @@ namespace TodoList.EF.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            
+            //For Migrations and nothing else
             services.AddDbContext<TodoListContext>(options => 
-                options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TodoListDb;Trusted_Connection=True;", 
+                options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TodoListDb;Trusted_Connection=True;MultipleActiveResultSets=True;", 
                     b => b.MigrationsAssembly("TodoList.EF.API"))
             );
 
@@ -49,6 +51,8 @@ namespace TodoList.EF.API
             });
 
             services.AddCors();
+
+            services.AddSingleton<TodoListFactory>();
 
             services.AddSingleton<TodoRepository>();
 
